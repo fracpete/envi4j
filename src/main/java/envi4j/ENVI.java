@@ -21,7 +21,7 @@ import java.util.Arrays;
  */
 public class ENVI {
 
-  public final static String[] EXTENSIONS = {".dat", ".DAT", ""};
+  public final static String[] EXTENSIONS = {".dat", ".DAT", ".raw", ""};
 
   /**
    * Loads the ENVI dataset from the specified file.
