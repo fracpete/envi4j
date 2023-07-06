@@ -18,7 +18,7 @@ public enum Interleave
   implements EnumWithCustomParsing<Interleave> {
 
   BAND_SEQUENTIAL("bsq", "Band Sequential"),
-  BAD_INTERLEAVED_BY_PIXEL("bip", "Band-interleaved-by-pixel"),
+  BAND_INTERLEAVED_BY_PIXEL("bip", "Band-interleaved-by-pixel"),
   BAND_INTERLEAVED_BY_LINE("bil", "Band-interleaved-by-line");
 
   /** the type. */

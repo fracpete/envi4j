@@ -140,7 +140,7 @@ public abstract class AbstractDataset
 	}
 	break;
 
-      case BAD_INTERLEAVED_BY_PIXEL:
+      case BAND_INTERLEAVED_BY_PIXEL:
 	for (i = 0; i < m_Lookup.length; i++) {
 	  b  = i % m_Bands;                 // the band
 	  s  = (i / m_Bands) % lineLen;     // the sample
