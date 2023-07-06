@@ -42,12 +42,24 @@ public class ENVI {
    * @return		the dataset, null if failed to load
    */
   public static AbstractDataset load(File hdrFile, boolean quiet) {
+    return load(hdrFile, quiet, EXTENSIONS);
+  }
+
+  /**
+   * Loads the ENVI dataset from the specified file.
+   *
+   * @param hdrFile	the .hdr file of the dataset to load
+   * @param quiet 	whether to suppress warnings/errors
+   * @param extensions  the extensions of the data files to look for
+   * @return		the dataset, null if failed to load
+   */
+  public static AbstractDataset load(File hdrFile, boolean quiet, String[] extensions) {
     Header	header;
     File	datFile;
 
     header = Header.read(hdrFile);
     if (header != null) {
-      for (String ext: EXTENSIONS) {
+      for (String ext: extensions) {
 	datFile = FileUtils.replaceExtension(hdrFile, ext);
 	if (datFile.exists())
 	  return AbstractDataset.read(header, datFile, quiet);
