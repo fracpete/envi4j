@@ -369,6 +369,144 @@ public class Header
   }
 
   /**
+   * Returns the specified header field as a string array.
+   *
+   * @param field	the field to retrieve
+   * @return		the string array, null if failed to retrieve or convert
+   */
+  public String[] getStringArray(HeaderField field) {
+    return getStringArray(field, null);
+  }
+
+  /**
+   * Returns the specified header field as a string array.
+   *
+   * @param field	the field to retrieve
+   * @param defValue 	the default value, can be null
+   * @return		the string array, null if failed to retrieve or convert
+   */
+  public String[] getStringArray(HeaderField field, String[] defValue) {
+    String[]	result;
+    String 	str;
+
+    // retrieve
+    str = get(field, String.class);
+    if (str == null) {
+      System.err.println("Field not found: " + field.getName());
+      return null;
+    }
+
+    // clean up
+    str = str.trim();
+    str = str.substring(1, str.length() - 1);  // remove {}
+
+    // split on new lines
+    result = str.split("\n");
+
+    return result;
+  }
+
+  /**
+   * Returns the specified header field as an integer array.
+   *
+   * @param field	the field to retrieve
+   * @return		the int array, null if failed to retrieve or convert
+   */
+  public int[] getIntArray(HeaderField field) {
+    return getIntArray(field, null);
+  }
+
+  /**
+   * Returns the specified header field as an integer array.
+   *
+   * @param field	the field to retrieve
+   * @param defValue 	the default value, can be null
+   * @return		the int array, null if failed to retrieve or convert
+   */
+  public int[] getIntArray(HeaderField field, int[] defValue) {
+    int[]	result;
+    String 	str;
+    String[]	parts;
+    int		i;
+
+    // retrieve
+    str = get(field, String.class);
+    if (str == null) {
+      System.err.println("Field not found: " + field.getName());
+      return null;
+    }
+
+    // clean up
+    str = str.replace("{", "").replace("}", "").replace(" ", "").replace("\n", "");
+
+    // parse
+    parts  = str.split(",");
+    result = new int[parts.length];
+    for (i = 0; i < parts.length; i++) {
+      try {
+        result[i] = Integer.parseInt(parts[i]);
+      }
+      catch (Exception e) {
+        System.err.println("Failed to parse element #" + i + " of int array (field: " + field.getName() + "): " + str);
+        e.printStackTrace();
+        return null;
+      }
+    }
+
+    return result;
+  }
+
+  /**
+   * Returns the specified header field as a double array.
+   *
+   * @param field	the field to retrieve
+   * @return		the double array, null if failed to retrieve or convert
+   */
+  public double[] getDoubleArray(HeaderField field) {
+    return getDoubleArray(field, null);
+  }
+
+  /**
+   * Returns the specified header field as a double array.
+   *
+   * @param field	the field to retrieve
+   * @param defValue 	the default value, can be null
+   * @return		the double array, null if failed to retrieve or convert
+   */
+  public double[] getDoubleArray(HeaderField field, double[] defValue) {
+    double[]	result;
+    String 	str;
+    String[]	parts;
+    int		i;
+
+    // retrieve
+    str = get(field, String.class);
+    if (str == null) {
+      System.err.println("Field not found: " + field.getName());
+      return null;
+    }
+
+    // clean up
+    str = str.replace("{", "").replace("}", "").replace(" ", "").replace("\n", "");
+
+    // parse
+    parts  = str.split(",");
+    result = new double[parts.length];
+    for (i = 0; i < parts.length; i++) {
+      try {
+	result[i] = Double.parseDouble(parts[i]);
+      }
+      catch (Exception e) {
+	System.err.println("Failed to parse element #" + i + " of double array (field: " + field.getName() + "): " + str);
+	e.printStackTrace();
+	return null;
+      }
+    }
+
+    return result;
+  }
+
+  /**
    * Returns the underlying data type in the data.
    *
    * @return		the data type
