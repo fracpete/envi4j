@@ -91,6 +91,18 @@ public class ENVI {
   }
 
   /**
+   * Saves the default bands as RGB image. Uses the file's extension to determine
+   * whether to save as JPG (.jpg/.jpeg) or PNG (.png).
+   *
+   * @param dataset	the dataset to use
+   * @param output	the output file
+   * @throws IOException	if unsupported extension or failed to output
+   */
+  public static void saveRGB(AbstractDataset dataset, File output) throws IOException {
+    ImageIO.write(dataset.toRGB(), determineImageType(output), output);
+  }
+
+  /**
    * Saves the specified bands as RGB image. Uses the file's extension to determine
    * whether to save as JPG (.jpg/.jpeg) or PNG (.png).
    *

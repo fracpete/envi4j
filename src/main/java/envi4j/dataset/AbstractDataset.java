@@ -311,6 +311,22 @@ public abstract class AbstractDataset
   }
 
   /**
+   * Turns the three bands defined as default bands into an RGB image.
+   *
+   * @return		the generated image
+   */
+  @Override
+  public BufferedImage toRGB() {
+    int[]	defaultBands;
+
+    defaultBands = getHeader().getIntArray(HeaderField.DEFAULT_BANDS);
+    if (defaultBands == null)
+      throw new IllegalStateException("No default bands defined!");
+
+    return toRGB(defaultBands[0], defaultBands[1], defaultBands[2]);
+  }
+
+  /**
    * Turns the three bands into an RGB image.
    *
    * @param r		the band to act as red channel

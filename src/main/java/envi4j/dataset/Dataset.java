@@ -140,6 +140,13 @@ public interface Dataset
   public String toString();
 
   /**
+   * Turns the three bands defined as default bands into an RGB image.
+   *
+   * @return		the generated image
+   */
+  public BufferedImage toRGB();
+
+  /**
    * Turns the three bands into an RGB image.
    *
    * @param r		the band to act as red channel
