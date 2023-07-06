@@ -25,10 +25,11 @@ public class ENVI {
 
   /**
    * Loads the ENVI dataset from the specified file.
-   * Suppresses warnings/errors.
+   * Suppresses warnings/errors. Uses default extensions.
    *
    * @param hdrFile	the .hdr file of the dataset to load
    * @return		the dataset, null if failed to load
+   * @see		#EXTENSIONS
    */
   public static AbstractDataset load(File hdrFile) {
     return load(hdrFile, true);
@@ -36,10 +37,12 @@ public class ENVI {
 
   /**
    * Loads the ENVI dataset from the specified file.
+   * Uses default extensions.
    *
    * @param hdrFile	the .hdr file of the dataset to load
    * @param quiet 	whether to suppress warnings/errors
    * @return		the dataset, null if failed to load
+   * @see		#EXTENSIONS
    */
   public static AbstractDataset load(File hdrFile, boolean quiet) {
     return load(hdrFile, quiet, EXTENSIONS);
